@@ -1,3 +1,95 @@
 h1 {
-  color: purple;
+  color: white;
+  text-align: center; 
+  font-family: fantasy;
+  justify-content: center;
 }
+
+body {
+  background-color: black;
+  margin: auto;
+  background-image: url("https://images-na.ssl-images-amazon.com/images/I/71nsk6vUTlL._AC_SL1470_.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+
+#boardWrapper {
+  text-align: center;
+  justify-content: center;
+  margin: auto;
+  width: 600px; 
+  display: block; 
+}
+
+#board {
+  display: grid; 
+  grid-template-rows: 200px 200px 200px; 
+  grid-template-columns: 200px 200px 200px; 
+  margin: auto; 
+  text-align: center;
+  background-color: #2b0404;
+}
+
+.gameboard {
+  background: white;
+  margin: 4px;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  text-align: center;
+  
+}
+
+p {
+  text-align: center; 
+  color: white;
+  font-family: fantasy; 
+
+}
+
+h2 {
+  text-align: center; 
+  color: white; 
+  font-family: fantasy;
+
+}
+
+.image {
+  background-image: url(https://images.indianexpress.com/2018/07/wp-harrypotter-01.jpg);
+  background-size: cover; 
+  background-position: center;
+  width: 200px; 
+  height: 200px;
+}
+
+.imageTwo {
+  background-image: url(https://upload.wikimedia.org/wikipedia/en/a/a3/Lordvoldemort.jpg);
+  background-size: cover; 
+  background-position: center;
+  width: 200px; 
+  height: 200px; 
+}
+
+.button {
+  background-color: #2e0505; 
+  color: white;  
+  text-align: center; 
+  font-family: fantasy; 
+  display: inline-block; 
+  font-size: 16px; 
+  justify-content: center;
+}
+
+.gryffindor {
+  background-image: url(https://cdn.shopify.com/s/files/1/1541/8579/products/BannerFlag-Gryffindor-HarryPotter-Product-_5-4895205600140_1.jpg?v=1520333907);
+  background-size: cover; 
+  background-position: center;
+}
+
+.slytherin {
+  background-image: url(https://cdn.shopify.com/s/files/1/1541/8579/products/WallBanner-Slytherin-HarryPotter-Product-_2_grande.jpg?v=1578459417);
+  background-size: cover;
+  background-position: center;
+}
+

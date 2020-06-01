@@ -3,12 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hello Front-End</title>
+  <title>Harry Potter Tic-Tac-Toe</title>
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-  <h1>Hello Front-End</h1>
-
+  <main class = "gamespace"></main>
+  <h1>Harry Potter Tic-Tac-Toe</h1>
+  <p id = "whosTurn"></p>
+  <div id = "boardWrapper">
+    <div id = "board">
+        <div class = "gameboard" id = "tl" ></div>
+        <div class = "gameboard" id = "tm" ></div>
+        <div class = "gameboard" id = "tr" ></div>
+        <div class = "gameboard" id = "ml" ></div>
+        <div class = "gameboard" id = "mm" ></div>
+        <div class = "gameboard" id = "mr" ></div>
+        <div class = "gameboard" id = "bl" ></div>
+        <div class = "gameboard" id = "bm" ></div>
+        <div class = "gameboard" id = "br" ></div>
+    </div>
+    <button class = "button" id = "reset">Reset Gameboard</button>
+    <button class = "button" id = "computer">Click to Play Computer</button>
+    <button class = "button" id = "twoPlayerGame">Two Player Game</button>
+  </div>
   <script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>

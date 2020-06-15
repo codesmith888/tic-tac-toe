@@ -6,7 +6,12 @@ let boxes = document.getElementsByClassName("gameboard")
 let computer = document.getElementById("computer")
 let twoPlayerGame = document.getElementById("twoPlayerGame")
 let gameOver = false 
-let computerPlaying = false 
+let computerPlaying = false
+
+//Click event listeners
+let playerTwoChooses
+let playerOneChooses
+let playerOneVersusComputerChooses
 
 //BOXES TO CLICK//
 let clickedBoxes = {
@@ -20,8 +25,6 @@ let clickedBoxes = {
     bm: false,
     br: false,
  };
-
-
 
 //START GAME AND EVENT LISTENERS//
 function startGame () {
@@ -37,9 +40,8 @@ function gamePlay () {
     if (computerPlaying == true) {
         return
     }
-    gameboard.addEventListener("click", playerOneChooses)
     whosTurn.innerText = "It is Harry Potter's Turn";
-    function playerOneChooses (e) {
+    playerOneChooses = function(e) {
         if (computerPlaying == true) {
             return
         }
@@ -56,7 +58,7 @@ function gamePlay () {
         gameboard.addEventListener("click", playerTwoChooses);    
     };
 
-    function playerTwoChooses (e) {
+    playerTwoChooses = function(e) {
         if (computerPlaying == true) {
             return
         }
@@ -72,114 +74,87 @@ function gamePlay () {
         whoIsWinning()
         gameboard.addEventListener("click", playerOneChooses);
     };
-    //RESET GAME//
-    reset.addEventListener("click", resetBoard);
-    function resetBoard () {
-        whosTurn.innerText = null
-        gameOver = false
-        clickedBoxes = {
-            tl: false,
-            tm: false,
-            tr: false,
-            ml: false,
-            mm: false,
-            mr: false,
-            bl: false,
-            bm: false,
-            br: false,
-            };
-        document.getElementById("tl").classList.remove("image", "imageTwo");
-        document.getElementById("tm").classList.remove("image", "imageTwo");
-        document.getElementById("tr").classList.remove("image", "imageTwo");
-        document.getElementById("ml").classList.remove("image", "imageTwo");
-        document.getElementById("mm").classList.remove("image", "imageTwo");
-        document.getElementById("mr").classList.remove("image", "imageTwo");
-        document.getElementById("bl").classList.remove("image", "imageTwo");
-        document.getElementById("bm").classList.remove("image", "imageTwo");
-        document.getElementById("br").classList.remove("image", "imageTwo");
-        document.body.classList.remove("slytherin");
-        document.body.classList.remove("gryffindor");
-        gameboard.removeEventListener("click", playerTwoChooses);
-        gameboard.removeEventListener("click", playerOneChooses);
-        startGame()
-     };
+    gameboard.addEventListener("click", playerOneChooses)
 };
 
 
 //COMPUTER PLAYER OPTION//
-    function withComputerPlayerGamePlay() {
-        computerPlaying == true
-        let gameOptions = ["tl", "tm", "tr", "ml", "mm", "mr", "bl", "bm", "br"];
-        resetBoard();
-        gameboard.addEventListener("click", playerOneVersusComputerChooses);
-        function playerOneVersusComputerChooses (e) {
-            if (gameOver == true) {
-                return
-            }
-            let harryPotter = document.getElementById(e.target.id);
-            harryPotter.classList.add("image");
-            console.log("Player One against computer chose " + e.target.id);
-            let playerChoice = e.target.id
-            let whatsLeft = gameOptions.indexOf(e.target.id)
-            gameOptions.splice(whatsLeft, 1)
-            console.log(gameOptions)
-            clickedBoxes[e.target.id] = "Harry Potter"
-            whosTurn.innerText = "It is Voldemort's Turn";
-            whoIsWinning() 
-            gameboard.removeEventListener("click", playerOneVersusComputerChooses);
-            computerChooses();   
-        };
+function withComputerPlayerGamePlay() {
+    computerPlaying == true
+    let gameOptions = ["tl", "tm", "tr", "ml", "mm", "mr", "bl", "bm", "br"];
+    resetBoard();
+    
+    playerOneVersusComputerChooses = function(e) {
+        if (gameOver == true) {
+            return
+        }
+        let harryPotter = document.getElementById(e.target.id);
+        harryPotter.classList.add("image");
+        console.log("Player One against computer chose " + e.target.id);
+        let playerChoice = e.target.id
+        let whatsLeft = gameOptions.indexOf(e.target.id)
+        gameOptions.splice(whatsLeft, 1)
+        console.log(gameOptions)
+        clickedBoxes[e.target.id] = "Harry Potter"
+        whosTurn.innerText = "It is Voldemort's Turn";
+        whoIsWinning() 
+        gameboard.removeEventListener("click", playerOneVersusComputerChooses);
+        computerChooses();   
+    };
 
-        function computerChooses () {
-            if (gameOver == true) {
-                return
-            } 
-            let computer = Math.floor(Math.random() * gameOptions.length);
-            computerChoice = gameOptions[computer];
-            console.log("The computer chose " + computerChoice); 
-            let voldemort = document.getElementById(computerChoice);
-            voldemort.classList.add("imageTwo"); 
-            clickedBoxes[computerChoice] = "Voldemort"
-            let whatsLeft = gameOptions.indexOf(computerChoice)
-            gameOptions.splice(whatsLeft, 1)
-            console.log(gameOptions)
-            whosTurn.innerText = "It is Harry Potter's Turn"; 
-            whoIsWinning()
-            gameboard.addEventListener("click", playerOneVersusComputerChooses);
-        };
+    function computerChooses () {
+        if (gameOver == true) {
+            return
+        } 
+        let computer = Math.floor(Math.random() * gameOptions.length);
+        computerChoice = gameOptions[computer];
+        console.log("The computer chose " + computerChoice); 
+        let voldemort = document.getElementById(computerChoice);
+        voldemort.classList.add("imageTwo"); 
+        clickedBoxes[computerChoice] = "Voldemort"
+        let whatsLeft = gameOptions.indexOf(computerChoice)
+        gameOptions.splice(whatsLeft, 1)
+        console.log(gameOptions)
+        whosTurn.innerText = "It is Harry Potter's Turn"; 
+        whoIsWinning()
+        gameboard.addEventListener("click", playerOneVersusComputerChooses);
+    };
+    gameboard.addEventListener("click", playerOneVersusComputerChooses);
+ };
 
  //RESET GAME//
-    reset.addEventListener("click", resetBoard);
-    function resetBoard () {
-        whosTurn.innerText = null
-        gameOver = false
-        clickedBoxes = {
-            tl: false,
-            tm: false,
-            tr: false,
-            ml: false,
-            mm: false,
-            mr: false,
-            bl: false,
-            bm: false,
-            br: false,
-            };
-        document.getElementById("tl").classList.remove("image", "imageTwo");
-        document.getElementById("tm").classList.remove("image", "imageTwo");
-        document.getElementById("tr").classList.remove("image", "imageTwo");
-        document.getElementById("ml").classList.remove("image", "imageTwo");
-        document.getElementById("mm").classList.remove("image", "imageTwo");
-        document.getElementById("mr").classList.remove("image", "imageTwo");
-        document.getElementById("bl").classList.remove("image", "imageTwo");
-        document.getElementById("bm").classList.remove("image", "imageTwo");
-        document.getElementById("br").classList.remove("image", "imageTwo");
-        document.body.classList.remove("slytherin");
-        document.body.classList.remove("gryffindor");
-        let gameOptions = ["tl", "tm", "tr", "ml", "mm", "mr", "bl", "bm", "br"];
-        gameboard.removeEventListener("click", playerOneVersusComputerChooses);
-        startGame()
-     };
- }; 
+ reset.addEventListener("click", resetBoard);
+ function resetBoard () {
+     whosTurn.innerText = null
+     gameOver = false
+     clickedBoxes = {
+         tl: false,
+         tm: false,
+         tr: false,
+         ml: false,
+         mm: false,
+         mr: false,
+         bl: false,
+         bm: false,
+         br: false,
+         };
+     document.getElementById("tl").classList.remove("image", "imageTwo");
+     document.getElementById("tm").classList.remove("image", "imageTwo");
+     document.getElementById("tr").classList.remove("image", "imageTwo");
+     document.getElementById("ml").classList.remove("image", "imageTwo");
+     document.getElementById("mm").classList.remove("image", "imageTwo");
+     document.getElementById("mr").classList.remove("image", "imageTwo");
+     document.getElementById("bl").classList.remove("image", "imageTwo");
+     document.getElementById("bm").classList.remove("image", "imageTwo");
+     document.getElementById("br").classList.remove("image", "imageTwo");
+     document.body.classList.remove("slytherin");
+     document.body.classList.remove("gryffindor");
+     let gameOptions = ["tl", "tm", "tr", "ml", "mm", "mr", "bl", "bm", "br"];
+     gameboard.removeEventListener("click", playerTwoChooses);
+     gameboard.removeEventListener("click", playerOneChooses);
+     gameboard.removeEventListener("click", playerOneVersusComputerChooses);
+     startGame()
+  };
  
 //DETERMINE WINNER//
 
@@ -235,7 +210,7 @@ function whoIsWinning () {
     } else if (clickedBoxes.tr != false && clickedBoxes.tm != false && clickedBoxes.tr != false && clickedBoxes.ml != false && clickedBoxes.mm != false && clickedBoxes.rm != false && clickedBoxes.bl != false && clickedBoxes.bm != false && clickedBoxes.br != false) {
         displayResults("Tie Game... Play Again")
     }
-    };
+};
 
     
     //DISPLAY RESULTS//
@@ -244,7 +219,3 @@ function whoIsWinning () {
         console.log(results)
         gameOver = true 
     };
-  
-
-
-
